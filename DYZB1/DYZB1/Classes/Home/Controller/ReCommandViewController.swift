@@ -119,6 +119,8 @@ extension ReCommendViewController : UICollectionViewDataSource,UICollectionViewD
         if indexPath.section == 0 {
             NetWorkTools.requestData(type: .GET, URLString: "http://httpbin.org/get", finishedCallback: { (result) in
                 print(result)
+                
+                
             })
         }
     }
