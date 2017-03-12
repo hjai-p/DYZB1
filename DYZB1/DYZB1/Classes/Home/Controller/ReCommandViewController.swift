@@ -23,6 +23,8 @@ private let kHeadViewID = "kHeadViewID"
 class ReCommendViewController: UIViewController {
     
     // MARK: -懒加载属性
+    fileprivate lazy var recommendVM : ReCommendViewModel = ReCommendViewModel()
+    
     fileprivate lazy var collectionView : UICollectionView = {[unowned self] in
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = kMargin
@@ -53,12 +55,27 @@ class ReCommendViewController: UIViewController {
         
         // MARK: -设置UI界面
         setupUI()
+        
+        // MARK: - 请求数据
+        loadData()
+    
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+
+
+// MARK: - 请求数据
+extension ReCommendViewController {
+    fileprivate func loadData() {
+        recommendVM.requestData { 
+            self.collectionView.reloadData()
+        }
     }
 }
 
@@ -76,34 +93,39 @@ extension ReCommendViewController {
 // MARK: -遵守UICollectionViewDataSource UICollectionViewDelegateFlowLayout协议
 extension ReCommendViewController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 12
+        return recommendVM.anchorGroups.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 8
-        }
-        
-        return 4
+        let group = recommendVM.anchorGroups[section]
+        return group.anchors.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell : UICollectionViewCell
+        // 1 取出模型
+        let group = recommendVM.anchorGroups[indexPath.section]
+        let anchor = group.anchors[indexPath.item]
+        
+        // 2 定义cell
+        var cell : CollectionBaseCell!
         
         if indexPath.section == 1 {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kPrettyCellID, for: indexPath)
+           cell = collectionView.dequeueReusableCell(withReuseIdentifier: kPrettyCellID, for: indexPath) as! CollectionPrettyCell
         } else {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath)
+           cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath) as! CollectionNormalCell
         }
+        
+        // 给cell设置数据源
+        cell.anchor = anchor
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kHeadViewID, for: indexPath)
+        let headView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kHeadViewID, for: indexPath) as! CollectionHeadView
         
-        headView.backgroundColor = UIColor.white
-        
+        headView.group = recommendVM.anchorGroups[indexPath.section]
+                
         return headView
     }
     
@@ -115,13 +137,4 @@ extension ReCommendViewController : UICollectionViewDataSource,UICollectionViewD
         return CGSize(width: kItemW, height: kNormalItemH)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            NetWorkTools.requestData(type: .GET, URLString: "http://httpbin.org/get", finishedCallback: { (result) in
-                print(result)
-                
-                
-            })
-        }
-    }
-}
+ }

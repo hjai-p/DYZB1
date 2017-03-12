@@ -133,9 +133,12 @@ extension PageTitleView {
         // 获取之前的label
         let oldLabel = titleLabels[currentIndex]
         
+        // 重复点击同一标题的话直接返回
+        if currentLabel.tag == currentIndex { return }
+        
         // 切换文字颜色
-        oldLabel.textColor = UIColor.darkGray
         currentLabel.textColor = UIColor.orange
+        oldLabel.textColor = UIColor.darkGray
         
         // 保存最新的label下标
         currentIndex = currentLabel.tag

@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CollectionNormalCell" customModule="DouYuZB" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CollectionNormalCell" customModule="DYZB1" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="215" height="125"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -26,10 +26,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="基本的cell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJH-iy-XEo">
-                        <rect key="frame" x="19" y="101" width="60" height="14"/>
+                        <rect key="frame" x="19" y="101" width="191" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="1rL-1Y-0jc"/>
-                            <constraint firstAttribute="width" constant="60" id="V3w-YW-ypM"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -54,7 +53,7 @@
                         <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rf9-eB-wZb">
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rf9-eB-wZb">
                         <rect key="frame" x="148" y="75" width="62" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <state key="normal" title="13亿在线" image="Image_online"/>
@@ -71,11 +70,18 @@
                 <constraint firstItem="xJH-iy-XEo" firstAttribute="bottom" secondItem="n0E-57-4BV" secondAttribute="bottom" id="f7c-tL-xh7"/>
                 <constraint firstItem="gnG-Fd-SGp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="fbP-jy-PB5"/>
                 <constraint firstAttribute="trailing" secondItem="gnG-Fd-SGp" secondAttribute="trailing" id="fy7-vD-hUw"/>
+                <constraint firstAttribute="trailing" secondItem="xJH-iy-XEo" secondAttribute="trailing" constant="5" id="j4n-UA-528"/>
                 <constraint firstItem="xJH-iy-XEo" firstAttribute="leading" secondItem="n0E-57-4BV" secondAttribute="trailing" constant="5" id="vXi-An-xUa"/>
                 <constraint firstItem="QEw-2T-gNp" firstAttribute="leading" secondItem="gnG-Fd-SGp" secondAttribute="leading" constant="5" id="ynv-kF-mkK"/>
                 <constraint firstItem="n0E-57-4BV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="yr1-28-uHy"/>
             </constraints>
             <size key="customSize" width="215" height="125"/>
+            <connections>
+                <outlet property="iconImageView" destination="gnG-Fd-SGp" id="01z-Qc-u5S"/>
+                <outlet property="nicknameLabel" destination="QEw-2T-gNp" id="l2S-uy-1gv"/>
+                <outlet property="onlineBtn" destination="Rf9-eB-wZb" id="Xwt-8O-N4l"/>
+                <outlet property="roomNameLabel" destination="xJH-iy-XEo" id="nin-0k-sP4"/>
+            </connections>
             <point key="canvasLocation" x="-15.5" y="43.5"/>
         </collectionViewCell>
     </objects>
